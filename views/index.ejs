@@ -18,25 +18,8 @@
     }
 </style> 
 <body>
-    <!-- //NOTE:Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-              <h3>
-                  Maru-Sensei
-              </h3>
-            </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link" href="#">Support</a>
-            </div>
-          </div>
-        </div>
-      </nav>
+
+    <%- include('components/navbar')  %> 
 
     <div class="row">
 
@@ -46,7 +29,15 @@
             <a class="navbar-brand text-center fw-bold text-dark">
                 <img src="/img/maru-sensei.png" class="rounded rounded-circle shadow-lg border border-3" width="150" height="150" alt="...">
                 <br>
-                Maru-Sensei
+                  Maru-Sensei 
+                  <br>
+                  <% if (botStatus === 200) { %>
+                    <span class="badge rounded-pill bg-success">Online</span>                   
+                  <% } else { %>
+                    <span class="badge rounded-pill bg-danger">Offline</span>                   
+                  <% } %>
+                   
+                <br>
                 <br>
                 <button onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=825205253007474729&permissions=8&scope=bot'" class="btn btn-primary shadow">
                     <i class="bi bi-discord"></i> Invite the bot
@@ -54,15 +45,45 @@
             </a>
         </div>
         <div class="container d-flex justify-content-center mt-5">
-            <div class="shadow-lg col-9 rounded">
-                <div class="text-center mt-3 fw-light fs-1">
-                    <h1 class="fw-light">
-                        Example:
-                    </h1>
+            <div class="shadow-lg col-11 col-lg-9 rounded">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  </div>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="/img/demo4.png" class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block fw-bold">
+                        <h5>Asking Something</h5>
+                        <p>Type your question and asking command, BOOM!! the bot will give answer</p>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/img/demo5.png" class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>Set your language</h5>
+                        <p>Support different languages....!!!</p>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/img/demo6.png" class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>Asking Something</h5>
+                        <p>Type your question and asking command, BOOM!! the bot will give answer</p>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-                <div class="text-center mb-5 p-3 pt-0">
-                    <img src="/img/demo1.png" class="img-fluid" width="" height="" alt="...">
-                </div>              
             </div>
         </div>
 
@@ -83,18 +104,20 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>m!help</td>
-                                <td>show avaible command</td>
-                            </tr>
-                            <tr>
+                              <% command.forEach(element => { %>
+                                <tr>
+                                  <td><%= element.command %> </td>
+                                  <td><%= element.usage %> </td>
+                                </tr>
+                              <% }) %>
+                            <!-- <tr>
                                 <td>m!ask <your question></td>
                                 <td>for asking with brainly server</td>
                               </tr>
                               <tr>
                                 <td>m!set <your country></td>
                                 <td>configure language [ID,EN]</td>
-                              </tr>
+                              </tr> -->
                             </tbody>
                           </table>
                     </div>
@@ -106,48 +129,7 @@
 
 
 
-    <footer class="text-center text-white mt-5 shadow-lg" style="background-color: #f1f1f1;">
-        <!-- Grid container -->
-        <div class="container pt-4">
-          <!-- Section: Social media -->
-          <section class="mb-4">
-
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="https://www.instagram.com/maruf_ilyasa/"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="bi bi-instagram"></i>
-            </a>
-      
-            <!-- Linkedin -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="bi bi-linkedin"></i>
-            </a>
-            <!-- Github -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="https://github.com/Maru-Yasa"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="bi bi-github"></i
-            ></a>
-          </section>
-          <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-      
-        <!-- Copyright -->
-        <div class="text-center text-dark p-3" style="background-color: #f1f1f1;">
-          © 2021 Copyright:
-          <a class="text-dark" href="/">marusensei.herokuapp.com</a>
-        </div>
-        <!-- Copyright -->
-      </footer>
+<%- include('components/footer') %> 
 
 
 </body>
